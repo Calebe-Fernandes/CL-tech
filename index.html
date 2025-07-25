@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CL/tech - Soluções Web Premium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Biblioteca para efeito de digitação -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0A0A;
+            overflow-x: hidden; /* Previne scroll horizontal */
+        }
+        .text-glow {
+            text-shadow: 0 0 8px rgba(251, 191, 36, 0.4), 0 0 20px rgba(251, 191, 36, 0.2);
+        }
+        .gradient-bg {
+            background: radial-gradient(circle at top left, rgba(251, 191, 36, 0.1), transparent 30%), radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.1), transparent 40%);
+        }
+        /* Estilos para o cursor do efeito de digitação */
+        .typed-cursor {
+            color: #fbbd23;
+            font-weight: 300;
+        }
+        /* Estilos para a animação de revelação ao rolar */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Estilo para o canvas do efeito Matrix */
+        #matrix-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Coloca o canvas atrás de tudo */
+        }
+        .hero-content {
+            position: relative;
+            z-index: 3; /* Garante que o conteúdo do hero fique na frente do overlay */
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 10, 10, 0.6); /* Overlay escuro para melhorar a leitura */
+            z-index: 2;
+        }
+    </style>
+</head>
+<body class="text-gray-300">
+
+    <!-- Navegação -->
+    <header class="bg-black/30 backdrop-blur-lg fixed top-0 left-0 right-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-white">CL/tech</a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#services" class="hover:text-amber-400 transition-colors">Serviços</a>
+                <a href="#solutions" class="hover:text-amber-400 transition-colors">Soluções</a>
+                <a href="#about" class="hover:text-amber-400 transition-colors">Sobre Nós</a>
+                <a href="#portfolio" class="hover:text-amber-400 transition-colors">Portfólio</a>
+                <a href="https://wa.me/5511982077494?text=Olá,%20gostaria%20de%20mais%20informações%20sobre%20seus%20serviços%20de%20tech" class="bg-amber-500 text-gray-900 px-4 py-2 rounded-md font-semibold hover:bg-amber-400 transition-colors">
+                    Vamos Conversar
+                </a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-white">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+        <!-- Menu Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900/90">
+            <a href="#services" class="block py-2 px-6 hover:bg-gray-800">Serviços</a>
+            <a href="#solutions" class="block py-2 px-6 hover:bg-gray-800">Soluções</a>
+            <a href="#about" class="block py-2 px-6 hover:bg-gray-800">Sobre Nós</a>
+            <a href="#portfolio" class="block py-2 px-6 hover:bg-gray-800">Portfólio</a>
+            <a href="https://wa.me/5511982077494?text=Olá,%20gostaria%20de%20mais%20informações%20sobre%20seus%20serviços%20de%20tech" class="block py-4 px-6 text-center bg-amber-500 text-gray-900 font-semibold">Vamos Conversar</a>
+        </div>
+    </header>
+
+    <main class="gradient-bg">
+        <!-- Seção Hero -->
+        <section class="min-h-screen flex items-center pt-20 relative overflow-hidden">
+            <canvas id="matrix-canvas"></canvas>
+            <div class="hero-overlay"></div>
+            <div class="container mx-auto px-6 text-center hero-content">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight">
+                    <span id="typed-hero"></span>
+                </h1>
+                <p class="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-gray-300 scroll-reveal">
+                    Criamos soluções web premium que combinam design intuitivo e desenvolvimento robusto para elevar a presença digital do seu negócio.
+                </p>
+                <div class="mt-10 flex justify-center items-center gap-4 scroll-reveal">
+                    <a  href="https://wa.me/5511982077494?text=Olá,%20gostaria%20de%20mais%20informações%20sobre%20seus%20serviços" class="bg-amber-500 text-gray-900 px-8 py-3 rounded-md font-bold text-lg hover:bg-amber-400 transition-transform hover:scale-105">
+                        Agendar Consulta
+                    </a>
+                    <a href="#portfolio" class="border border-gray-600 text-white px-8 py-3 rounded-md font-bold text-lg hover:bg-gray-800 transition-colors">
+                        Ver Projetos
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Serviços Técnicos -->
+        <section id="services" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 scroll-reveal">
+                    <h2 class="text-4xl font-bold text-white">Nossa Expertise Técnica</h2>
+                    <p class="text-gray-400 mt-2">Uma solução completa para sua necessidade digital.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Card 1: UX/UI Design -->
+                    <div class="bg-gray-900/50 p-8 rounded-xl border border-gray-800 hover:border-amber-400 transition-all duration-300 hover:scale-105 scroll-reveal cursor-pointer">
+                        <i data-lucide="figma" class="w-12 h-12 text-amber-400 mb-4"></i>
+                        <h3 class="text-xl font-bold text-white mb-2">UX/UI Design</h3>
+                        <p class="text-gray-400">Criamos interfaces intuitivas e visualmente impactantes, focadas na melhor experiência para o seu usuário.</p>
+                    </div>
+                    <!-- Card 2: Frontend -->
+                    <div class="bg-gray-900/50 p-8 rounded-xl border border-gray-800 hover:border-blue-400 transition-all duration-300 hover:scale-105 scroll-reveal cursor-pointer" style="transition-delay: 100ms;">
+                        <i data-lucide="code-xml" class="w-12 h-12 text-blue-400 mb-4"></i>
+                        <h3 class="text-xl font-bold text-white mb-2">Desenvolvimento Frontend</h3>
+                        <p class="text-gray-400">Transformamos designs em realidade com código limpo, responsivo e otimizado para performance.</p>
+                    </div>
+                    <!-- Card 3: Backend -->
+                    <div class="bg-gray-900/50 p-8 rounded-xl border border-gray-800 hover:border-blue-400 transition-all duration-300 hover:scale-105 scroll-reveal cursor-pointer" style="transition-delay: 200ms;">
+                        <i data-lucide="server" class="w-12 h-12 text-blue-400 mb-4"></i>
+                        <h3 class="text-xl font-bold text-white mb-2">Desenvolvimento Backend</h3>
+                        <p class="text-gray-400">Construímos a lógica, APIs e bancos de dados que dão poder e segurança à sua aplicação.</p>
+                    </div>
+                    <!-- Card 4: WordPress & SEO -->
+                    <div class="bg-gray-900/50 p-8 rounded-xl border border-gray-800 hover:border-amber-400 transition-all duration-300 hover:scale-105 scroll-reveal cursor-pointer" style="transition-delay: 300ms;">
+                        <!-- Ícone do WordPress em SVG -->
+                        <i data-lucide="monitor-smartphone" class="w-12 h-12 text-amber-400 mb-4"></i>
+                        <h3 class="text-xl font-bold text-white mb-2">WordPress</h3>
+                        <p class="text-gray-400">Desenvolvemos sites gerenciáveis em WordPress para que você seja encontrado no Google.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- NOVA SEÇÃO: Soluções para o cliente -->
+        <section id="solutions" class="py-20 bg-gray-900/70">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 scroll-reveal">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-white leading-tight">Qual problema podemos <span class="text-amber-400 text-glow">resolver</span> hoje?</h2>
+                    <p class="text-gray-400 mt-4 max-w-2xl mx-auto text-lg">Não precisa ser um expert em tecnologia. Diga-nos o que você precisa, e nós transformamos em realidade.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Card: Criação de Site -->
+                    <div class="bg-gray-800/50 p-8 rounded-xl border-2 border-transparent hover:border-amber-500 transition-all duration-300 transform hover:-translate-y-2 scroll-reveal cursor-pointer">
+                        <i data-lucide="monitor-smartphone" class="w-12 h-12 text-amber-400 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-white mb-3">Preciso de um Site</h3>
+                        <p class="text-gray-400">Criamos sites profissionais, landing pages e portfólios para apresentar sua marca ao mundo com credibilidade e estilo.</p>
+                    </div>
+                    <!-- Card: Blog -->
+                    <div class="bg-gray-800/50 p-8 rounded-xl border-2 border-transparent hover:border-amber-500 transition-all duration-300 transform hover:-translate-y-2 scroll-reveal cursor-pointer" style="transition-delay: 100ms;">
+                        <i data-lucide="newspaper" class="w-12 h-12 text-amber-400 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-white mb-3">Quero um Blog</h3>
+                        <p class="text-gray-400">Tenha um espaço para compartilhar suas ideias, conhecimentos ou notícias. Criamos blogs fáceis de gerenciar.</p>
+                    </div>
+                    <!-- Card: App Web / Sistema -->
+                    <div class="bg-gray-800/50 p-8 rounded-xl border-2 border-transparent hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2 scroll-reveal cursor-pointer" style="transition-delay: 200ms;">
+                        <i data-lucide="app-window" class="w-12 h-12 text-blue-400 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-white mb-3">Preciso de um Sistema</h3>
+                        <p class="text-gray-400">Desenvolvemos sistemas e aplicativos web sob medida para gerenciar seu negócio, seus clientes ou seus processos internos.</p>
+                    </div>
+                    <!-- Card: Automação -->
+                    <div class="bg-gray-800/50 p-8 rounded-xl border-2 border-transparent hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2 scroll-reveal cursor-pointer" style="transition-delay: 300ms;">
+                        <i data-lucide="bot" class="w-12 h-12 text-blue-400 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-white mb-3">Quero Automatizar Tarefas</h3>
+                        <p class="text-gray-400">Cansado de tarefas repetitivas? Usamos ferramentas como o n8n para automatizar seus processos e liberar seu tempo para o que importa.</p>
+                    </div>
+                    <!-- Card: Loja Virtual -->
+                    <div class="bg-gray-800/50 p-8 rounded-xl border-2 border-transparent hover:border-amber-500 transition-all duration-300 transform hover:-translate-y-2 scroll-reveal cursor-pointer" style="transition-delay: 400ms;">
+                        <i data-lucide="shopping-cart" class="w-12 h-12 text-amber-400 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-white mb-3">Quero Vender Online</h3>
+                        <p class="text-gray-400">Montamos sua loja virtual completa, segura e otimizada para você vender seus produtos ou serviços pela internet 24h por dia.</p>
+                    </div>
+                    <!-- Card: Consultoria -->
+                    <div class="bg-gray-800/50 p-8 rounded-xl border-2 border-transparent hover:border-gray-500 transition-all duration-300 transform hover:-translate-y-2 scroll-reveal cursor-pointer" style="transition-delay: 500ms;">
+                        <i data-lucide="lightbulb" class="w-12 h-12 text-gray-400 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-white mb-3">Não sei por onde começar</h3>
+                        <p class="text-gray-400">Tem uma ideia mas não sabe qual o próximo passo? Oferecemos direcionamento para te ajudar a encontrar a melhor solução tecnológica.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Sobre Nós -->
+        <section id="about" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 scroll-reveal">
+                    <h2 class="text-4xl font-bold text-white">Conheça a Dupla</h2>
+                    <p class="text-gray-400 mt-2">Unimos criatividade e tecnologia para entregar resultados.</p>
+                </div>
+                <div class="flex flex-wrap justify-center gap-10 lg:gap-20 items-stretch">
+                    <!-- Card Calebe -->
+                    <div class="bg-gray-800/50 rounded-xl p-8 max-w-sm w-full flex flex-col items-center text-center border border-gray-700 scroll-reveal">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQFXsCGHT7N6cw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1696527699452?e=1756339200&v=beta&t=pK8Jrzg2eBObSDi49AjSBHG5tGJzps855Wv23oJ_gqE" alt="[Foto de Calebe Fernandes]" class="w-32 h-32 rounded-full mb-4 border-4 border-blue-500">
+                        <h3 class="text-2xl font-bold text-white">Calebe Fernandes</h3>
+                        <p class="text-blue-400 font-semibold mb-4">Desenvolvedor Full Stack</p>
+                        <p class="text-gray-400 flex-grow">Apaixonado por tecnologia e especialista em criar aplicações robustas e escaláveis com as mais modernas tecnologias do mercado.</p>
+                        <a href="https://www.linkedin.com/in/calebe-fernandes-de-oliveira-a841ba1b0/" target="_blank" rel="noopener noreferrer" class="mt-6 inline-block text-amber-400 font-semibold hover:text-amber-300">
+                            Ver LinkedIn <i data-lucide="arrow-right" class="inline-block w-4 h-4"></i>
+                        </a>
+                    </div>
+                    <!-- Card Luanda -->
+                    <div class="bg-gray-800/50 rounded-xl p-8 max-w-sm w-full flex flex-col items-center text-center border border-gray-700 scroll-reveal" style="transition-delay: 150ms;">
+                        <img src="https://media.licdn.com/dms/image/v2/C4E03AQEiKH6A4kMWgA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1624555247919?e=1756339200&v=beta&t=Kmuulk7OEIDtGvqXjirC0zB00RCl5BC3ZsbsjdsCpNU" alt="[Foto de Luanda Vital]" class="w-32 h-32 rounded-full mb-4 border-4 border-amber-500">
+                        <h3 class="text-2xl font-bold text-white">Luanda Vital</h3>
+                        <p class="text-amber-400 font-semibold mb-4">UX/UI Designer & Dev Frontend</p>
+                        <p class="text-gray-400 flex-grow">Focada em criar experiências digitais que não só pareçam incríveis, mas que sejam intuitivas e eficientes, conectando marcas e pessoas através do web design.</p>
+                        <a href="https://www.linkedin.com/in/luanda-vital/" target="_blank" rel="noopener noreferrer" class="mt-6 inline-block text-amber-400 font-semibold hover:text-amber-300">
+                            Ver LinkedIn <i data-lucide="arrow-right" class="inline-block w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Portfólio -->
+        <section id="portfolio" class="py-20 bg-gray-900/60">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 scroll-reveal">
+                    <h2 class="text-4xl font-bold text-white">Nosso Trabalho em Ação</h2>
+                    <p class="text-gray-400 mt-2">Um exemplo de como entregamos valor.</p>
+                </div>
+                <div class="bg-gray-900/50 rounded-xl border border-gray-800 overflow-hidden flex flex-col lg:flex-row scroll-reveal">
+                    <div class="lg:w-1/2 p-8 lg:p-12 flex flex-col justify-center">
+                        <p class="font-semibold text-amber-400">Case de Sucesso</p>
+                        <h3 class="text-3xl font-bold text-white mt-2">Victalino Advogados</h3>
+                        <p class="mt-4 text-gray-400">
+                            <strong>Desafio:</strong> Criar uma presença online profissional e confiável para um escritório de advocacia.
+                        </p>
+                        <p class="mt-2 text-gray-400">
+                            <strong>Solução:</strong> Desenvolvemos um site institucional elegante, com navegação clara e design responsivo, focando em transmitir credibilidade e facilitar o contato de novos clientes.
+                        </p>
+                        <a href="https://victalinoadvogados.com.br/" target="_blank" rel="noopener noreferrer" class="mt-8 bg-white text-gray-900 px-6 py-3 rounded-md font-bold hover:bg-gray-200 transition-colors self-start">
+                            Ver Projeto ao Vivo
+                        </a>
+                    </div>
+                    <div class="lg:w-1/2 p-4 bg-white">
+                        <img src="https://victalinoadvogados.com.br/wp-content/themes/victalino/assets/logo-icon.png" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/600x400/0a0a0a/ffffff?text=Erro+ao+carregar+imagem';"
+                             alt="[Imagem do site Victalino Advogados]" 
+                             >
+                    </div>
+                </div>
+                                
+            </div>
+        </section>
+
+        <!-- Seção de Contato -->
+        <section id="contact" class="py-20">
+            <div class="container mx-auto px-6 text-center scroll-reveal">
+                <h2 class="text-4xl font-bold text-white">Vamos construir algo incrível juntos?</h2>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">
+                    Se você tem uma ideia, um projeto ou precisa uma direcionamento, estamos prontos para ajudar.
+                </p>
+                <div class="mt-8">
+                    <a  href="https://wa.me/5511982077494?text=Olá,%20gostaria%20de%20mais%20informações%20sobre%20seus%20serviços%20de%20tech" class="bg-amber-500 text-gray-900 px-10 py-4 rounded-md font-bold text-xl hover:bg-amber-400 transition-transform hover:scale-105 inline-block">
+                        Entre em Contato
+                    </a>
+                    <p class="text-gray-500 mt-4 text-sm">Ou nos envie um email em: contato.cl.tech@gmail.com</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black py-8">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p>&copy; 2025 Calebe & Luanda. Todos os direitos reservados.</p>
+            <p class="text-sm mt-2">Desenvolvido com <i data-lucide="heart" class="inline-block w-4 h-4 text-red-500"></i> e muito código.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Inicia o Lucide Icons
+        lucide.createIcons();
+
+        // Lógica do Menu Mobile
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+        
+        // Efeito Matrix
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let matrixInterval;
+
+        function setupMatrix() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const nums = '0123456789';
+            const alphabet =  latin + nums;
+
+            const fontSize = 16;
+            const columns = Math.floor(canvas.width / fontSize);
+
+            const rainDrops = [];
+            for (let x = 0; x < columns; x++) {
+                rainDrops[x] = 1;
+            }
+
+            const draw = () => {
+                // Fundo com rastro mais longo para um efeito mais suave
+                ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.fillStyle = '#FFFFFF'; // Cor branca
+                ctx.font = fontSize + 'px monospace';
+
+                for (let i = 0; i < rainDrops.length; i++) {
+                    const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                    ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+                    if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        rainDrops[i] = 0;
+                    }
+                    rainDrops[i]++;
+                }
+            };
+            
+            if (matrixInterval) clearInterval(matrixInterval);
+            // Intervalo aumentado para 60ms para desacelerar a animação
+            matrixInterval = setInterval(draw, 60);
+        }
+
+        window.addEventListener('resize', setupMatrix);
+
+
+        // Lógica para Efeitos ao carregar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicia o efeito Matrix
+            setupMatrix();
+
+            // Efeito de Digitação
+            if (document.getElementById('typed-hero')) {
+                new Typed('#typed-hero', {
+                    strings: ['Da <span class="text-amber-400 text-glow">Ideia</span> ao <span class="text-blue-400">Código</span>', 'Transformamos <span class="text-blue-400">Problemas</span> em <span class="text-amber-400 text-glow">Soluções</span>'],
+                    // Velocidade de digitação e de apagar diminuídas (valores maiores = mais lento)
+                    typeSpeed: 40,
+                    backSpeed: 40,
+                    startDelay: 500,
+                    showCursor: true,
+                    cursorChar: '_',
+                    loop: true,
+                });
+            }
+
+            // Animação de Revelação ao Rolar
+            const revealElements = document.querySelectorAll('.scroll-reveal');
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            revealElements.forEach(elem => {
+                revealObserver.observe(elem);
+            });
+        });
+    </script>
+</body>
+</html>
